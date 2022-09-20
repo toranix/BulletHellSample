@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bankdrelwod0g"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_w7jql"]
+[ext_resource type="Texture2D" uid="uid://6getmqtk52a6" path="res://Assets/Player Spritesheet.png" id="2_q2u8v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o4prf"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w7jql")
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture = ExtResource("2_q2u8v")
+hframes = 8
+vframes = 3
+region_enabled = true
+region_rect = Rect2(16, 16, 256, 144)
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o4prf")
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
