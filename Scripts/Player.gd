@@ -2,13 +2,11 @@ extends CharacterBody2D
 class_name Player
 
 const INVULNERABLE_DURATION : float = 1.0
+const PLAYER_MARGIN : float = 10
 
 @export var speed : float = 6
 @export var slow_speed : float = 2.5
 var invulnerable : bool = false
-
-func get_class(): return "Player"
-func is_class(cls): return cls == "Player"
 
 func _ready():
 	GlobalVariables.player = self
@@ -29,8 +27,8 @@ func _process(_delta):
 	
 	# Clamp Player position to borders
 	self.position = Vector2(
-		clamp(self.position.x, -GlobalConstants.PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.x + GlobalConstants.PLAYER_MARGIN),
-		clamp(self.position.y, -GlobalConstants.PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.y + GlobalConstants.PLAYER_MARGIN)
+		clamp(self.position.x, -PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.x + PLAYER_MARGIN),
+		clamp(self.position.y, -PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.y + PLAYER_MARGIN)
 	)
 
 func on_hit():
