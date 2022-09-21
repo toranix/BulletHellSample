@@ -32,8 +32,8 @@ func _process(_delta):
 	
 	# Clamp Player position to borders
 	self.position = Vector2(
-		clamp(self.position.x, -PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.x + PLAYER_MARGIN),
-		clamp(self.position.y, -PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.y + PLAYER_MARGIN)
+		clamp(self.position.x, PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.x - PLAYER_MARGIN),
+		clamp(self.position.y, PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.y - PLAYER_MARGIN)
 	)
 	
 	update_animation(input_direction, is_slow)

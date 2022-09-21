@@ -134,10 +134,8 @@ playing = true
 position = Vector2(0, -1)
 z_index = 1
 texture = ExtResource("3_pumre")
-hframes = 4
-vframes = 4
 region_enabled = true
-region_rect = Rect2(269, 33, 256, 239)
+region_rect = Rect2(269, 32, 64, 64)
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o4prf")
