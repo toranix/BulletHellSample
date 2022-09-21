@@ -1,11 +1,11 @@
 extends Node2D
 
 const BULLET_CAPACITY : int = 5000
-const BULLET_HITBOXES := [11.5, 5.5]
+const BULLET_HITBOXES := [11.5, 5.5, 4.0]
 const BULLET_PADDING : float = 50
 
 enum COLOUR {RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK}
-enum BULLET_TYPE {MEDIUM_ROUND, SMALL_ROUND}
+enum BULLET_TYPE {MEDIUM_ROUND, SMALL_ROUND, SMALL_ARROWHEAD}
 
 var bounding_box : Rect2
 var bullet = preload("res://Objects/Bullet.tscn")

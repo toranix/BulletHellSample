@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_qk7ln"]
 
 [node name="Bullet" type="Sprite2D"]
+texture_filter = 1
+texture_repeat = 1
 texture = ExtResource("1_a10o2")
 hframes = 7
 region_enabled = true

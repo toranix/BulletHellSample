@@ -3,7 +3,8 @@ class_name Bullet
 
 const BULLET_REGIONS : Array = [
 	Rect2(0, 0, 224, 32),
-	Rect2(0, 32, 112, 16)
+	Rect2(0, 32, 112, 16),
+	Rect2(112, 32, 112, 16)
 ]
 const CULLING_THRESHOLD : float = 0
 const DESPAWN_DELAY : float = 0.15
@@ -66,7 +67,7 @@ func init_bullet(posn, init_angle, init_speed, init_type, init_colour) -> void:
 	type = init_type
 	colour = init_colour
 	direction = Vector2.RIGHT.rotated(angle)
-	rotation = angle
+	rotation = angle + PI / 2
 	frame = colour
 	region_rect = BULLET_REGIONS[type]
 	freed = false
