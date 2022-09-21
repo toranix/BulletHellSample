@@ -21,8 +21,7 @@ func _process(_delta):
 	var input_direction := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
-	)
-	input_direction = input_direction.normalized()
+	).normalized()
 	
 	# Read slow or normal movement speed
 	var is_slow := Input.get_action_strength("slow")
@@ -37,18 +36,21 @@ func _process(_delta):
 	)
 	
 	update_animation(input_direction, is_slow)
-	
+
+# Sets the specific character's attributes
 func init_char(hitbox : float, spd : float, slow_spd : float) -> void:
 	$CollisionShape2d.shape.radius = hitbox
 	speed = spd
 	slow_speed = slow_spd
 
+# Called when hit by a bullet (or enemy)
 func on_hit():
 	if (!self.invulnerable):
 		print("Hit!")
 		self.invulnerable = true
 		$InvulnerableTimer.start()
 
+# Updates animation states for both the character and hitbox sprites
 func update_animation(input_direction : Vector2, is_slow : bool) -> void:
 	# Character body animation
 	var current_animation = $CharacterSprite.animation

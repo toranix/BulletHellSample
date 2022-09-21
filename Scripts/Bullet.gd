@@ -21,6 +21,7 @@ var direct_space_state : PhysicsDirectSpaceState2D
 var lifetime : float
 var is_queued_for_despawn : bool
 
+# Basic initialization
 func _ready() -> void:
 	direct_space_state = get_world_2d().direct_space_state
 	query.collide_with_bodies = true
@@ -55,38 +56,45 @@ func _process(delta) -> void:
 		GlobalVariables.player.on_hit()
 		queue_despawn()
 		return
-		
+
+# Called when bullet is to be despawned (either destroyed on screen or has left the screen)
 func queue_despawn() -> void:
 	is_queued_for_despawn = true
 	$DespawnTimer.start()
 
+# Sets data for "spawning" a "new" bullet
 func init_bullet(posn, init_angle, init_speed, init_type, init_colour) -> void:
+	# Physics Properties
 	position = posn
 	angle = deg_to_rad(init_angle)
 	speed = init_speed
+	direction = Vector2.RIGHT.rotated(angle)
+	shape = GlobalVariables.bullet_factory.bullet_shapes[type]
+	query.set_shape(shape)
+
+	# Sprite Properties
 	type = init_type
 	colour = init_colour
-	direction = Vector2.RIGHT.rotated(angle)
 	rotation = angle + PI / 2
 	frame = colour
 	region_rect = BULLET_REGIONS[type]
+	modulate.a = 1.0
+	
+	# Entity Properties and misc
 	freed = false
 	is_queued_for_despawn = false
-	modulate.a = 1.0
-	shape = GlobalVariables.bullet_factory.bullet_shapes[type]
 	lifetime = 0
-	query.set_shape(shape)
 	GlobalVariables.active_bullet_count += 1
 	show()
 	set_process(true)
 
+# Deactivates the bullet to save on resources without deallocating it
 func despawn_bullet() -> void:
 	freed = true
 	is_queued_for_despawn = false
 	GlobalVariables.active_bullet_count -= 1
 	hide()
 	set_process(false)
-
 
 func _on_despawn_timer_timeout():
 	despawn_bullet()
