@@ -1,11 +1,11 @@
 extends Node2D
 
 const BULLET_CAPACITY : int = 5000
-const BULLET_HITBOXES := [13.5]
+const BULLET_HITBOXES := [11.5, 5.5]
 const BULLET_PADDING : float = 50
 
 enum COLOUR {RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK}
-enum BULLET_TYPE {MEDIUM_ROUND}
+enum BULLET_TYPE {MEDIUM_ROUND, SMALL_ROUND}
 
 var bounding_box : Rect2
 var bullet = preload("res://Objects/Bullet.tscn")
@@ -34,4 +34,4 @@ func get_bullet() -> Bullet:
 
 func spawn_bullet(posn, angle, init_speed, type, colour) -> void:
 	var b = get_bullet()
-	if b: b.init_bullet(posn, angle, init_speed, type, colour)
+	if b: b.init_bullet(posn, wrapf(angle, 0, 360), init_speed, type, colour)
