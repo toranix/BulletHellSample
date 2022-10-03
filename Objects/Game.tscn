@@ -1,27 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg3dwlfo3pgnr"]
+[gd_scene load_steps=3 format=3 uid="uid://bg3dwlfo3pgnr"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_o404d"]
-[ext_resource type="PackedScene" uid="uid://briavijmy285c" path="res://Objects/PlayArea.tscn" id="2_842kg"]
-[ext_resource type="PackedScene" uid="uid://qnju6n4q325i" path="res://Objects/Overlay.tscn" id="3_mfax8"]
+[ext_resource type="PackedScene" uid="uid://cb3mo5n0m70ux" path="res://Objects/MainMenu.tscn" id="2_wnmxm"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_o404d")
-
-[node name="PlayArea" parent="." instance=ExtResource("2_842kg")]
 
 [node name="Debug" type="Node2D" parent="."]
 z_index = 3
 
 [node name="FramerateLabel" type="Label" parent="Debug"]
-offset_left = 240.0
+offset_left = 340.0
 offset_top = 672.0
-offset_right = 280.0
+offset_right = 380.0
 offset_bottom = 695.0
 
 [node name="BulletCountLabel" type="Label" parent="Debug"]
-offset_left = 800.0
+offset_left = 900.0
 offset_top = 672.0
-offset_right = 840.0
+offset_right = 940.0
 offset_bottom = 695.0
 horizontal_alignment = 2
 
@@ -30,6 +27,8 @@ offset_top = 697.0
 offset_right = 40.0
 offset_bottom = 720.0
 
-[node name="Overlay" parent="." instance=ExtResource("3_mfax8")]
-position = Vector2(540, 360)
-z_index = 2
+[node name="MainMenu" parent="." instance=ExtResource("2_wnmxm")]
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0

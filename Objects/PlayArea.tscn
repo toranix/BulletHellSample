@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://biwjcuy5bjfv8" path="res://Objects/BulletFactory.tscn" id="3_xdk2q"]
 
 [node name="PlayArea" type="Control"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 240.0

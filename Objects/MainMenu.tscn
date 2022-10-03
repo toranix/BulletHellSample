@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb3mo5n0m70ux"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_fh8pf"]
+[ext_resource type="Texture2D" uid="uid://c3i1jmir45bh6" path="res://Assets/Menu Background.png" id="1_k7nqb"]
+[ext_resource type="PackedScene" uid="uid://c5wt184addsvc" path="res://Objects/MenuButton.tscn" id="1_s5fcf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fh8pf")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+offset_left = -504.0
+offset_top = -88.0
+offset_right = -262.0
+offset_bottom = 91.0
+
+[node name="StartGame" parent="Buttons" instance=ExtResource("1_s5fcf")]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 242.0
+offset_bottom = 57.0
+text = "Start Game"
+
+[node name="Filler" parent="Buttons" instance=ExtResource("1_s5fcf")]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 61.0
+offset_right = 242.0
+offset_bottom = 118.0
+text = "Filler"
+
+[node name="Exit" parent="Buttons" instance=ExtResource("1_s5fcf")]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 122.0
+offset_right = 242.0
+offset_bottom = 179.0
+text = "Exit"
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_k7nqb")
