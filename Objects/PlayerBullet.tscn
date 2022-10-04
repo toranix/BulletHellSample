@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuuxo8110j7v6"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerBullet.gd" id="1_6shbi"]
+[ext_resource type="Texture2D" uid="uid://6getmqtk52a6" path="res://Assets/Player Spritesheet.png" id="1_h5m02"]
+
+[node name="PlayerBullet" type="Sprite2D"]
+texture = ExtResource("1_h5m02")
+region_enabled = true
+region_rect = Rect2(16, 160, 16, 16)
+script = ExtResource("1_6shbi")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

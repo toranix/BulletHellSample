@@ -24,12 +24,18 @@ func init_bullet(posn, init_angle, init_speed, init_type, init_colour) -> void:
 	frame = colour
 	region_rect = REGIONS[type]
 	modulate.a = 1.0
+	
+func _handle_border_culling() -> void:
+	if (lifetime >= CULLING_THRESHOLD):
+		if (!Global.enemy_bullet_factory.bounding_box.has_point(position)):
+			queue_despawn()
+			return
 
 func _handle_collision() -> void:
 	# Check collision with Player
 	query.transform = global_transform
 	var result := direct_space_state.intersect_shape(query, 1)
-	if result:
+	if result.size() > 0 && result[0].collider is Player:
 		Global.player.on_hit()
 		queue_despawn()
 		return

@@ -37,13 +37,12 @@ func _process(delta) -> void:
 	position += direction * speed
 	lifetime += delta
 	
-	# Border culling
-	if (lifetime >= CULLING_THRESHOLD):
-		if (!Global.enemy_bullet_factory.bounding_box.has_point(position)):
-			queue_despawn()
-			return
+	_handle_border_culling()
 
 	_handle_collision()
+
+func _handle_border_culling() -> void:
+	pass
 
 func _handle_collision() -> void:
 	pass

@@ -7,5 +7,6 @@ const SPAWN_POSN := Vector2(300,600)
 
 var debug : bool = true
 var player : Player
+var player_bullet_factory : Node2D
 var enemy_bullet_factory : Node2D
 var active_bullet_count : int = 0

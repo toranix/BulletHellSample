@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0n7mvgvyaoen"]
 
-[ext_resource type="Texture2D" uid="uid://40ct2ik74y75" path="res://Assets/Bullet Spritesheet.png" id="1_a10o2"]
+[ext_resource type="Texture2D" uid="uid://cjsomk3lyv6g1" path="res://Assets/Bullet Spritesheet.png" id="1_a10o2"]
 [ext_resource type="Script" path="res://Scripts/EnemyBullet.gd" id="2_jqi5i"]
 
 [node name="EnemyBullet" type="Sprite2D"]
@@ -13,6 +13,7 @@ region_rect = Rect2(0, 0, 224, 48)
 script = ExtResource("2_jqi5i")
 
 [node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.15
 one_shot = true
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

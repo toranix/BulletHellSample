@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://booih3pkplsd1"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerBulletFactory.gd" id="1_imral"]
+
+[node name="PlayerBulletFactory" type="Node2D"]
+script = ExtResource("1_imral")

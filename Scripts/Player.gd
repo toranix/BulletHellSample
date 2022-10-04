@@ -3,6 +3,7 @@ class_name Player
 
 const INVULNERABLE_DURATION : float = 1.0
 const PLAYER_MARGIN : float = 10
+const BASIC_SHOT_COOLDOWN : float = 0.04
 
 @export var speed : float
 @export var slow_speed : float
@@ -12,6 +13,7 @@ var is_basic_shot_on_cooldown : bool = false
 func _ready():
 	Global.player = self
 	$InvulnerableTimer.set_wait_time(INVULNERABLE_DURATION)
+	$BasicShotTimer.set_wait_time(BASIC_SHOT_COOLDOWN)
 	$HitboxSprite.scale = Vector2(0,0)
 	init_char(1.5, 6, 2.5)
 
@@ -59,7 +61,10 @@ func on_hit():
 func _handle_shoot(is_slow) -> void:
 	# Basic shots
 	if !is_basic_shot_on_cooldown:
-		pass
+		Global.player_bullet_factory.spawn_bullet(position + Vector2(10,0), -90, 15.0, PlayerBullet.TYPE.REIMU_BASIC)
+		Global.player_bullet_factory.spawn_bullet(position - Vector2(10,0), -90, 15.0, PlayerBullet.TYPE.REIMU_BASIC)
+		$BasicShotTimer.start()
+		is_basic_shot_on_cooldown = true
 
 # Updates animation states for both the character and hitbox sprites
 func _update_animation(input_direction : Vector2, is_slow : bool) -> void:
@@ -83,3 +88,7 @@ func _update_animation(input_direction : Vector2, is_slow : bool) -> void:
 
 func _on_invulnerable_timer_timeout():
 	self.invulnerable = false
+
+
+func _on_basic_shot_timer_timeout():
+	self.is_basic_shot_on_cooldown = false
