@@ -7,8 +7,7 @@ const PLAYER_MARGIN : float = 10
 @export var speed : float
 @export var slow_speed : float
 var invulnerable : bool = false
-
-func get_class() -> String: return "Player"
+var is_basic_shot_on_cooldown : bool = false
 
 func _ready():
 	Global.player = self
@@ -26,6 +25,11 @@ func _process(_delta):
 	# Read slow or normal movement speed
 	var is_slow := Input.get_action_strength("slow")
 	
+	# Read player shooting input
+	var is_shoot := Input.get_action_strength("confirm")
+	if is_shoot:
+		_handle_shoot(is_slow)
+	
 	# Move Player
 	self.position += input_direction * (slow_speed if is_slow else speed)
 	
@@ -35,13 +39,14 @@ func _process(_delta):
 		clamp(self.position.y, PLAYER_MARGIN, Global.PLAY_AREA_SIZE.y - PLAYER_MARGIN)
 	)
 	
-	update_animation(input_direction, is_slow)
+	_update_animation(input_direction, is_slow)
 
 # Sets the specific character's attributes
 func init_char(hitbox : float, spd : float, slow_spd : float) -> void:
 	$CollisionShape2d.shape.radius = hitbox
 	speed = spd
 	slow_speed = slow_spd
+	self.position = Global.SPAWN_POSN
 
 # Called when hit by a bullet (or enemy)
 func on_hit():
@@ -50,8 +55,14 @@ func on_hit():
 		self.invulnerable = true
 		$InvulnerableTimer.start()
 
+# Player shooting method
+func _handle_shoot(is_slow) -> void:
+	# Basic shots
+	if !is_basic_shot_on_cooldown:
+		pass
+
 # Updates animation states for both the character and hitbox sprites
-func update_animation(input_direction : Vector2, is_slow : bool) -> void:
+func _update_animation(input_direction : Vector2, is_slow : bool) -> void:
 	# Character body animation
 	var current_animation = $CharacterSprite.animation
 	if (input_direction.x < 0 && current_animation != "MoveLeft"):

@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://0n7mvgvyaoen"]
 
 [ext_resource type="Texture2D" uid="uid://40ct2ik74y75" path="res://Assets/Bullet Spritesheet.png" id="1_a10o2"]
-[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_qk7ln"]
+[ext_resource type="Script" path="res://Scripts/EnemyBullet.gd" id="2_jqi5i"]
 
-[node name="Bullet" type="Sprite2D"]
+[node name="EnemyBullet" type="Sprite2D"]
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("1_a10o2")
 hframes = 7
 region_enabled = true
 region_rect = Rect2(0, 0, 224, 48)
-script = ExtResource("1_qk7ln")
+script = ExtResource("2_jqi5i")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true

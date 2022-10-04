@@ -19,6 +19,16 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Scripts/BulletFactory.gd"
 }, {
+"base": "Bullet",
+"class": &"EnemyBullet",
+"language": &"GDScript",
+"path": "res://Scripts/EnemyBullet.gd"
+}, {
+"base": "BulletFactory",
+"class": &"EnemyBulletFactory",
+"language": &"GDScript",
+"path": "res://Scripts/EnemyBulletFactory.gd"
+}, {
 "base": "Control",
 "class": &"Menu",
 "language": &"GDScript",
@@ -32,6 +42,8 @@ _global_script_classes=[{
 _global_script_class_icons={
 "Bullet": "",
 "BulletFactory": "",
+"EnemyBullet": "",
+"EnemyBulletFactory": "",
 "Menu": "",
 "Player": ""
 }

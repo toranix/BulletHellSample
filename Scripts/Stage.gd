@@ -1,7 +1,7 @@
 extends Control
 
-var is_escape_previous_frame : bool
 var frame : int = 0
+var is_escape_previous_frame : bool
 var split : int = 3
 
 func _ready():
@@ -24,9 +24,9 @@ func _debug_enemy_shoot() -> void:
 	frame += 1
 	if (frame % 2 == 0):
 		for n in split:
-			Global.bullet_factory.spawn_enemy_bullet(
+			Global.enemy_bullet_factory.spawn_bullet(
 				Global.PLAY_AREA_SIZE / 2,
 				frame * 17 + (n * 360 / split),
 				1.5,
-				Bullet.TYPE_ENEMY.SMALL_ROUND,
-				(frame / 9) % Bullet.COLOUR.size())
+				EnemyBullet.TYPE.SMALL_ROUND,
+				(frame / 9) % EnemyBullet.COLOUR.size())
