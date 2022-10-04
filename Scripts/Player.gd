@@ -11,7 +11,7 @@ var invulnerable : bool = false
 func get_class() -> String: return "Player"
 
 func _ready():
-	GlobalVariables.player = self
+	Global.player = self
 	$InvulnerableTimer.set_wait_time(INVULNERABLE_DURATION)
 	$HitboxSprite.scale = Vector2(0,0)
 	init_char(1.5, 6, 2.5)
@@ -31,8 +31,8 @@ func _process(_delta):
 	
 	# Clamp Player position to borders
 	self.position = Vector2(
-		clamp(self.position.x, PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.x - PLAYER_MARGIN),
-		clamp(self.position.y, PLAYER_MARGIN, GlobalConstants.PLAY_AREA_SIZE.y - PLAYER_MARGIN)
+		clamp(self.position.x, PLAYER_MARGIN, Global.PLAY_AREA_SIZE.x - PLAYER_MARGIN),
+		clamp(self.position.y, PLAYER_MARGIN, Global.PLAY_AREA_SIZE.y - PLAYER_MARGIN)
 	)
 	
 	update_animation(input_direction, is_slow)

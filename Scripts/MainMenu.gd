@@ -2,10 +2,10 @@ extends Menu
 
 func _handle_extra_input() -> void:
 	# Check for confirming menu option
-	var isConfirmed : bool = Input.get_action_strength("confirm")
-	if isConfirmed:
-		var selected = $Buttons.get_children().filter(func(button): return button.isSelected)[0]
-		hasGivenInput = true
+	var is_confirmed : bool = Input.get_action_strength("confirm")
+	if is_confirmed:
+		var selected = $Buttons.get_children().filter(func(button): return button.is_selected)[0]
+		has_given_input = true
 		match String(selected.name):
 			"StartGame":
 				get_node("/root/Game").start_game()
