@@ -18,12 +18,15 @@ func _process(_delta):
 		get_tree().paused = true
 	isEscapePreviousFrame = isEscape
 	
+#	_debug_enemy_shoot()
+
+func _debug_enemy_shoot() -> void:
 	frame += 1
 	if (frame % 2 == 0):
 		for n in split:
-			GlobalVariables.bullet_factory.spawn_bullet(
+			GlobalVariables.bulletFactory.spawn_enemy_bullet(
 				GlobalConstants.PLAY_AREA_SIZE / 2,
 				frame * 17 + (n * 360 / split),
 				1.5,
-				GlobalVariables.bullet_factory.BULLET_TYPE.SMALL_ROUND,
-				(frame / 9) % GlobalVariables.bullet_factory.COLOUR.size())
+				Bullet.TYPE_ENEMY.SMALL_ROUND,
+				(frame / 9) % Bullet.COLOUR.size())

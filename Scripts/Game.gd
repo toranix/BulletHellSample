@@ -13,7 +13,7 @@ func _process(_delta):
 func update_debug() -> void:
 	if !GlobalVariables.debug: return
 	$Debug/FramerateLabel.text = str(Engine.get_frames_per_second())
-	$Debug/BulletCountLabel.text = str(GlobalVariables.active_bullet_count)
+	$Debug/BulletCountLabel.text = str(GlobalVariables.activeBulletCount)
 	$Debug/MemoryLabel.text = str(Performance.get_monitor(Performance.MEMORY_STATIC)/1024.0/1024.0).pad_decimals(2) + " MB"
 
 func start_game() -> void:

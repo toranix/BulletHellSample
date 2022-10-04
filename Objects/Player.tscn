@@ -143,4 +143,6 @@ shape = SubResource("CircleShape2D_o4prf")
 [node name="InvulnerableTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="BasicShotTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
