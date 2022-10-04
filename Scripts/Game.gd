@@ -16,9 +16,17 @@ func update_debug() -> void:
 	$Debug/BulletCountLabel.text = str(GlobalVariables.active_bullet_count)
 	$Debug/MemoryLabel.text = str(Performance.get_monitor(Performance.MEMORY_STATIC)/1024.0/1024.0).pad_decimals(2) + " MB"
 
-func start_game():
+func start_game() -> void:
 	$MainMenu.set_process(false)
 	$MainMenu.hide()
 	var newStage = stage.instantiate()
-	newStage.name = "Stage0"
-	add_child(newStage)
+	$StageContainer.add_child(newStage)
+
+func restart_game() -> void:
+	$StageContainer.get_child(0).queue_free()
+	start_game()
+	
+func main_menu() -> void:
+	$StageContainer.get_child(0).queue_free()
+	$MainMenu.set_process(true)
+	$MainMenu.show()

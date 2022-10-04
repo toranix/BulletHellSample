@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgh3c8m413fh2"]
+
+[ext_resource type="PackedScene" uid="uid://c5wt184addsvc" path="res://Objects/MenuButton.tscn" id="1_6ln3h"]
+[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_k6ohd"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6ohd")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Continue" parent="Buttons" instance=ExtResource("1_6ln3h")]
+layout_mode = 2
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 453.0
+offset_bottom = 57.0
+text = "Continue"
+
+[node name="RetryStage" parent="Buttons" instance=ExtResource("1_6ln3h")]
+layout_mode = 2
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 61.0
+offset_right = 453.0
+offset_bottom = 118.0
+text = "Retry Stage"
+
+[node name="Filler" parent="Buttons" instance=ExtResource("1_6ln3h")]
+layout_mode = 2
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 122.0
+offset_right = 453.0
+offset_bottom = 179.0
+text = "Filler"
+
+[node name="MainMenu" parent="Buttons" instance=ExtResource("1_6ln3h")]
+layout_mode = 2
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 183.0
+offset_right = 453.0
+offset_bottom = 240.0
+text = "Return to Main Menu"

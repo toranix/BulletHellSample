@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ldh0lgwj8s"]
+[gd_scene load_steps=5 format=3 uid="uid://b1ldh0lgwj8s"]
 
 [ext_resource type="PackedScene" uid="uid://briavijmy285c" path="res://Objects/PlayArea.tscn" id="1_80wfv"]
 [ext_resource type="Script" path="res://Scripts/Stage.gd" id="1_ahddf"]
+[ext_resource type="PackedScene" uid="uid://dgh3c8m413fh2" path="res://Objects/PauseMenu.tscn" id="2_a6xiu"]
 [ext_resource type="PackedScene" uid="uid://qnju6n4q325i" path="res://Objects/Overlay.tscn" id="2_putno"]
 
 [node name="Stage" type="Control"]
@@ -19,3 +20,9 @@ offset_right = 940.0
 
 [node name="Overlay" parent="." instance=ExtResource("2_putno")]
 position = Vector2(640, 360)
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_a6xiu")]
+offset_left = 360.0
+offset_top = 448.0
+offset_right = 360.0
+offset_bottom = 448.0

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cb3mo5n0m70ux" path="res://Objects/MainMenu.tscn" id="2_wnmxm"]
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_o404d")
 
 [node name="Debug" type="Node2D" parent="."]
@@ -28,7 +29,14 @@ offset_right = 40.0
 offset_bottom = 720.0
 
 [node name="MainMenu" parent="." instance=ExtResource("2_wnmxm")]
+process_mode = 1
 offset_left = 640.0
 offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="StageContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

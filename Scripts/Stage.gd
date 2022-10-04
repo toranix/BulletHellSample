@@ -1,10 +1,23 @@
 extends Control
 
+var isEscapePreviousFrame : bool
 var frame : int = 0
 var split : int = 3
 
+func _ready():
+	$PauseMenu.hide()
+	isEscapePreviousFrame = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+	var isEscape : bool = Input.get_action_strength("escape")
+	if (isEscape && !isEscapePreviousFrame):
+		print("pause")
+		$PauseMenu.select_button(0)
+		$PauseMenu.show()
+		get_tree().paused = true
+	isEscapePreviousFrame = isEscape
+	
 	frame += 1
 	if (frame % 2 == 0):
 		for n in split:
