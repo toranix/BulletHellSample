@@ -14,12 +14,14 @@ grow_vertical = 2
 script = ExtResource("1_fh8pf")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = -504.0
 offset_top = -88.0
 offset_right = -262.0
 offset_bottom = 91.0
 
 [node name="StartGame" parent="Buttons" instance=ExtResource("1_s5fcf")]
+layout_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 242.0
@@ -27,6 +29,7 @@ offset_bottom = 57.0
 text = "Start Game"
 
 [node name="Filler" parent="Buttons" instance=ExtResource("1_s5fcf")]
+layout_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_top = 61.0
@@ -35,6 +38,7 @@ offset_bottom = 118.0
 text = "Filler"
 
 [node name="Exit" parent="Buttons" instance=ExtResource("1_s5fcf")]
+layout_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_top = 122.0
