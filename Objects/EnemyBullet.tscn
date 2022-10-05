@@ -7,7 +7,6 @@
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("1_a10o2")
-hframes = 7
 region_enabled = true
 region_rect = Rect2(0, 0, 224, 32)
 script = ExtResource("2_jqi5i")

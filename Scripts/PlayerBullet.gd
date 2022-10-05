@@ -4,7 +4,6 @@ class_name PlayerBullet
 enum TYPE {REIMU_BASIC, REIMU_HOMING}
 
 const SPEEDS := [15.0, 18.0]
-const HITBOXES := [8.0, 32.0]
 const REGIONS := [
 	Rect2(16, 160, 16, 16),
 	Rect2(16, 208, 64, 64),
@@ -22,7 +21,7 @@ func init_bullet(posn, init_angle, init_type) -> void:
 func _handle_animation() -> void:
 	match type:
 		TYPE.REIMU_HOMING:
-			rotation += PI / 50
+			rotation += PI / 15
 
 func _handle_border_culling() -> void:
 	if (lifetime >= CULLING_THRESHOLD):
@@ -31,7 +30,7 @@ func _handle_border_culling() -> void:
 			return
 
 func _handle_collision() -> void:
-	if position.distance_squared_to(Global.debug_homing_position) <= pow(HITBOXES[TYPE.REIMU_HOMING]+20.0, 2):
+	if position.distance_squared_to(Global.debug_homing_position) <= pow(Global.player_bullet_factory.bullet_shapes[TYPE.REIMU_HOMING].radius+20.0, 2):
 		set_angle(randf()*2*PI)
 		queue_despawn()
 	return
@@ -58,7 +57,7 @@ func _handle_movement() -> void:
 				speed = max(SPEEDS[TYPE.REIMU_HOMING]*0.2, speed * 0.95)
 			else:
 				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.1)
-			set_angle(angle + difference * 0.1)
+			set_angle(angle + difference * 0.1, false)
 			continue
 		_:
 			position += direction * speed

@@ -19,7 +19,7 @@ func _process(_delta):
 	is_escape_previous_frame = is_escape
 	
 	frame += 1
-#	_debug_enemy_shoot()
+	_debug_enemy_shoot()
 	_debug_homing()
 
 func _debug_enemy_shoot() -> void:
@@ -30,8 +30,7 @@ func _debug_enemy_shoot() -> void:
 				Global.PLAY_AREA_SIZE / 2,
 				deg_to_rad(frame * 17 + (n * 360 / split)),
 				1.5,
-				EnemyBullet.TYPE.SMALL_ARROWHEAD,
-				(frame / 9) % EnemyBullet.COLOUR.size())
+				randi()%21)
 
 func _debug_homing() -> void:
 	if (frame % 120 == 0):

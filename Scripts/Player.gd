@@ -63,10 +63,10 @@ func _handle_shoot(is_slow) -> void:
 	if !is_basic_shot_on_cooldown:
 		Global.player_bullet_factory.spawn_bullet(position + Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
 		Global.player_bullet_factory.spawn_bullet(position - Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
-		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(80), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(50), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(100), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(130), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(75), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(35), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(105), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(145), PlayerBullet.TYPE.REIMU_HOMING)
 		$BasicShotTimer.start()
 		is_basic_shot_on_cooldown = true
 

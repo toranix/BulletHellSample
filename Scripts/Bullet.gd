@@ -73,9 +73,9 @@ func _init_bullet(posn, init_angle, init_speed) -> void:
 	show()
 	set_process(true)
 	
-func set_angle(new_angle : float) -> void:
+func set_angle(new_angle : float, update_rotation : bool = true) -> void:
 	angle = wrapf(new_angle, 0, 2*PI)
-	rotation = angle
+	rotation = angle if update_rotation else rotation
 	direction = Vector2.RIGHT.rotated(angle)
 
 # Deactivates the bullet to save on resources without deallocating it
