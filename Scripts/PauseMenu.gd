@@ -1,31 +1,29 @@
 extends Menu
 
-func _ready() -> void:
-	inputs = ["down", "up", "confirm", "escape"]
-	has_given_input = true
+func _on_ready() -> void:
+	inputs += ["escape"]
+	for input in inputs:
+		previous_frame_inputs[input] = 1.0
 
-func _handle_extra_input() -> void:
-	# Check for confirming menu option
-	var is_confirmed : bool = Input.get_action_strength("confirm")
-	if is_confirmed:
-		var selected = $Buttons.get_children().filter(func(button): return button.is_selected)[0]
-		has_given_input = true
-		match String(selected.name):
-			"Continue":
-				hide()
-				get_tree().paused = false
-			"RetryStage":
-				get_tree().paused = false
-				get_node("/root/Game").restart_game()
-			"Filler":
-				print("Filler chosen")
-			"MainMenu":
-				get_tree().paused = false
-				get_node("/root/Game").main_menu()
-		return
-	
-	var is_escape : bool = Input.get_action_strength("escape")
-	if is_escape:
-		has_given_input = true
-		hide()
-		get_tree().paused = false
+func _handle_confirm() -> void:
+	var selected = $Buttons.get_children().filter(func(button): return button.is_selected)[0]
+	match String(selected.name):
+		"Continue":
+			resume()
+		"RetryStage":
+			get_tree().paused = false
+			get_node("/root/Game").restart_game()
+		"Filler":
+			Global.debug.dprint("Filler chosen")
+		"MainMenu":
+			get_tree().paused = false
+			get_node("/root/Game").main_menu()
+
+func _handle_extra_input(current_frame_inputs) -> void:
+	if current_frame_inputs["escape"] && !previous_frame_inputs["escape"]:
+		resume()
+
+func resume() -> void:
+	hide()
+	Global.debug.dprint("unpaused")
+	get_tree().paused = false

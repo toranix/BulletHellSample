@@ -53,7 +53,7 @@ func init_char(hitbox : float, spd : float, slow_spd : float) -> void:
 # Called when hit by a bullet (or enemy)
 func on_hit():
 	if (!self.invulnerable):
-		print("Hit!")
+		Global.debug.dprint("Player is Hit!")
 		self.invulnerable = true
 		$InvulnerableTimer.start()
 

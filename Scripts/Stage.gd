@@ -12,15 +12,17 @@ func _ready():
 func _process(_delta):
 	var is_escape : bool = Input.get_action_strength("escape")
 	if (is_escape && !is_escape_previous_frame):
-		print("pause")
+		Global.debug.dprint("paused")
 		$PauseMenu.select_button(0)
 		$PauseMenu.show()
 		get_tree().paused = true
 	is_escape_previous_frame = is_escape
 	
 	frame += 1
-	_debug_enemy_shoot()
-	_debug_homing()
+	
+	if Global.debug:
+#		_debug_enemy_shoot()
+		_debug_homing()
 
 func _debug_enemy_shoot() -> void:
 	var split : int = 2
@@ -34,6 +36,9 @@ func _debug_enemy_shoot() -> void:
 
 func _debug_homing() -> void:
 	if (frame % 120 == 0):
-		Global.debug_homing_position = Vector2(randi()%400+100, randi()%500+85)
-		print("Debug homing target: %s" % Global.debug_homing_position)
+		Global.debug_new_homing_position = Vector2(randi()%400+100, randi()%500+85)
+		Global.debug.dprint("New debug homing target: %s" % Global.debug_new_homing_position)
+	var direction_to = Global.debug_homing_position.direction_to(Global.debug_new_homing_position)
+	var distance_to = Global.debug_homing_position.distance_to(Global.debug_new_homing_position)
+	Global.debug_homing_position += direction_to * distance_to * 0.05
 	return

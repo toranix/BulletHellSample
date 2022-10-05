@@ -2,34 +2,47 @@ extends Control
 class_name Menu
 
 var selected_button : int
-var has_given_input : bool
-var inputs = ["down", "up", "confirm"]
+var previous_frame_inputs : Dictionary = {"down": 0.0, "up": 0.0, "confirm": 1.0}
+var inputs := ["down", "up", "confirm"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	has_given_input = false
 	select_button(0)
+	_on_ready()
+
+func _on_ready() -> void:
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	# Check if input was held from before, don't take new input if so
-	if (has_given_input):
-		for input in inputs:
-			var input_strength = Input.get_action_strength(input)
-			if input_strength == 1: return
-	has_given_input = false
+	# Check status of all menu-relevant inputs
+	var current_frame_inputs : Dictionary = {}
+	for input in inputs:
+		current_frame_inputs[input] = Input.get_action_strength(input)
 	
-	# Check for selection menu options
-	var selection_delta : int = Input.get_action_strength("down") - Input.get_action_strength("up")
+	# Handle (new) inputs
+	var selection_delta = 0
+	for input in inputs:
+		match (input if current_frame_inputs[input] && !previous_frame_inputs[input] else null):
+			"down":
+				selection_delta += 1
+			"up":
+				selection_delta -= 1
+			"confirm":
+				_handle_confirm()
+		
 	if selection_delta != 0:
 		var new_selection : int = (selection_delta + selected_button + $Buttons.get_child_count()) % $Buttons.get_child_count()
-		has_given_input = true
 		select_button(new_selection)
-		return
 	
-	_handle_extra_input()
+	_handle_extra_input(current_frame_inputs)
+	
+	previous_frame_inputs = current_frame_inputs
 
-func _handle_extra_input() -> void:
+func _handle_confirm() -> void:
+	pass
+
+func _handle_extra_input(current_frame_inputs : Dictionary) -> void:
 	pass
 
 # Sets appropriate button as selected (and all others as deselected)
