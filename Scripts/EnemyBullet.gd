@@ -20,7 +20,6 @@ func init_bullet(posn, init_angle, init_speed, init_type, init_colour) -> void:
 	# Sprite Properties
 	type = init_type
 	colour = init_colour
-	rotation = angle + PI / 2
 	frame = colour
 	region_rect = REGIONS[type]
 	modulate.a = 1.0

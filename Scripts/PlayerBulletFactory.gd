@@ -15,6 +15,6 @@ func _on_ready() -> void:
 	bullet = preload("res://Objects/PlayerBullet.tscn")
 	bullet_capacity = BULLET_CAPACITY
 
-func spawn_bullet(posn, angle, init_speed, type) -> void:
+func spawn_bullet(posn, angle, type) -> void:
 	var b = get_bullet()
-	if b: b.init_bullet(posn, angle, init_speed, type)
+	if b: b.init_bullet(posn, wrapf(angle, 0, 2*PI), type)

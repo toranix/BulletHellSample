@@ -17,4 +17,4 @@ func _on_ready() -> void:
 
 func spawn_bullet(posn, angle, init_speed, type, colour) -> void:
 	var b = get_bullet()
-	if b: b.init_bullet(posn, angle, init_speed, type, colour)
+	if b: b.init_bullet(posn, wrapf(angle, 0, 2*PI), init_speed, type, colour)

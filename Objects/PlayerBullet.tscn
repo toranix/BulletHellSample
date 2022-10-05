@@ -6,7 +6,7 @@
 [node name="PlayerBullet" type="Sprite2D"]
 texture = ExtResource("1_h5m02")
 region_enabled = true
-region_rect = Rect2(16, 160, 16, 16)
+region_rect = Rect2(16, 208, 64, 64)
 script = ExtResource("1_6shbi")
 
 [node name="DespawnTimer" type="Timer" parent="."]

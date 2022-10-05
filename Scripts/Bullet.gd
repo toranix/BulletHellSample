@@ -4,8 +4,8 @@ class_name Bullet
 const CULLING_THRESHOLD : float = 0
 const DESPAWN_DELAY : float = 0.15
 
-@export var speed : float
 @export var angle : float
+@export var speed : float
 @export var type : int
 var direction : Vector2
 var freed : bool
@@ -32,32 +32,36 @@ func _process(delta) -> void:
 	if is_queued_for_despawn:
 		modulate.a = max(modulate.a - 0.1, 0.0)
 		return
-	
-	# Move Bullet
-	position += direction * speed
+		
 	lifetime += delta
 	
+	_handle_movement()
+	_handle_animation()
 	_handle_border_culling()
-
 	_handle_collision()
+
+func _handle_animation() -> void:
+	pass
 
 func _handle_border_culling() -> void:
 	pass
 
 func _handle_collision() -> void:
 	pass
+	
+func _handle_movement() -> void:
+	position += direction * speed
 
 # Called when bullet is to be despawned (either destroyed on screen or has left the screen)
 func queue_despawn() -> void:
 	is_queued_for_despawn = true
 	$DespawnTimer.start()
-	
+
 func _init_bullet(posn, init_angle, init_speed) -> void:
 	# Physics Properties
 	position = posn
-	angle = deg_to_rad(init_angle)
 	speed = init_speed
-	direction = Vector2.RIGHT.rotated(angle)
+	set_angle(init_angle)
 	shape = Global.enemy_bullet_factory.bullet_shapes[type]
 	query.set_shape(shape)
 	
@@ -68,6 +72,11 @@ func _init_bullet(posn, init_angle, init_speed) -> void:
 	Global.active_bullet_count += 1
 	show()
 	set_process(true)
+	
+func set_angle(new_angle : float) -> void:
+	angle = wrapf(new_angle, 0, 2*PI)
+	rotation = angle
+	direction = Vector2.RIGHT.rotated(angle)
 
 # Deactivates the bullet to save on resources without deallocating it
 func despawn_bullet() -> void:
