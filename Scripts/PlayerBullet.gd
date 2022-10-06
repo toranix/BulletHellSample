@@ -16,7 +16,7 @@ func init_bullet(posn, init_angle, init_type) -> void:
 	# Sprite Properties
 	type = init_type
 	region_rect = REGIONS[type]
-	modulate.a = 0.4
+	modulate.a = 0.25
 
 func _handle_animation() -> void:
 	match type:
@@ -30,14 +30,14 @@ func _handle_border_culling() -> void:
 			return
 
 func _handle_collision() -> void:
-	if position.distance_squared_to(Global.debug_homing_position) <= pow(Global.player_bullet_factory.bullet_shapes[TYPE.REIMU_HOMING].radius+20.0, 2):
-		set_angle(randf()*2*PI)
-		queue_despawn()
-	return
+#	if position.distance_squared_to(Global.debug_homing_position) <= pow(Global.player_bullet_factory.bullet_shapes[TYPE.REIMU_HOMING].radius+20.0, 2):
+#		set_angle(randf()*2*PI)
+#		queue_despawn()
+#	return
 	# Check collision with Enemies
 	query.transform = global_transform
 	var result := direct_space_state.intersect_shape(query, 1)
-	if result.size() > 0 && !(result[0].collider is Player):
+	if result.size() > 0 && result[0].collider is StageEntity:
 		set_angle(randf()*2*PI)
 		queue_despawn()
 		return
@@ -54,9 +54,9 @@ func _handle_movement() -> void:
 			if (abs(difference) > deg_to_rad(30) &&
 				abs(difference) < deg_to_rad(150) &&
 				position.distance_squared_to(Global.debug_homing_position) <= pow(150, 2)):
-				speed = max(SPEEDS[TYPE.REIMU_HOMING]*0.2, speed * 0.95)
+				speed = max(SPEEDS[TYPE.REIMU_HOMING]*0.2, speed * 0.9)
 			else:
-				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.1)
+				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.15)
 			set_angle(angle + difference * 0.1, false)
 			continue
 		_:

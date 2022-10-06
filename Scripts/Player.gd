@@ -3,7 +3,7 @@ class_name Player
 
 const INVULNERABLE_DURATION : float = 1.0
 const PLAYER_MARGIN : float = 10
-const BASIC_SHOT_COOLDOWN : float = 0.04
+const BASIC_SHOT_COOLDOWN : float = 0.14
 
 @export var speed : float
 @export var slow_speed : float

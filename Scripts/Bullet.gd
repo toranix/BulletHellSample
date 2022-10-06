@@ -30,7 +30,7 @@ func _ready() -> void:
 func _process(delta) -> void:
 	# Fade out bullet and do nothing else if queued for despawning
 	if is_queued_for_despawn:
-		modulate.a = max(modulate.a - 0.1, 0.0)
+		modulate.a = max(modulate.a * 0.9, 0.0)
 		return
 		
 	lifetime += delta

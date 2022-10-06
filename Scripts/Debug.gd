@@ -28,7 +28,7 @@ func _process(delta):
 	$FramerateLabel.text = str(Engine.get_frames_per_second())
 	$BulletCountLabel.text = str(Global.active_bullet_count)
 	$MemoryLabel.text = str(Performance.get_monitor(Performance.MEMORY_STATIC)/1024.0/1024.0).pad_decimals(2) + " MB"
-	$HomingTarget.position = Global.debug_homing_position + Vector2(320,25)
+	$HomingTarget.position = Global.debug_homing_position + Vector2(340-15,25-15)
 
 func to_stage() -> void:
 	$BulletCountLabel.show()
@@ -39,4 +39,4 @@ func to_main_menu() -> void:
 	$HomingTarget.hide()
 
 func dprint(s) -> void:
-	print("[DEBUG] " + s)
+	print("[DEBUG] " + str(s))

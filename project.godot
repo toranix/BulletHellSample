@@ -53,6 +53,11 @@ _global_script_classes=[{
 "class": &"PlayerBulletFactory",
 "language": &"GDScript",
 "path": "res://Scripts/PlayerBulletFactory.gd"
+}, {
+"base": "CharacterBody2D",
+"class": &"StageEntity",
+"language": &"GDScript",
+"path": "res://Scripts/StageEntity.gd"
 }]
 _global_script_class_icons={
 "Bullet": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "Menu": "",
 "Player": "",
 "PlayerBullet": "",
-"PlayerBulletFactory": ""
+"PlayerBulletFactory": "",
+"StageEntity": ""
 }
 
 [application]
