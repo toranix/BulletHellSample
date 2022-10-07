@@ -2,6 +2,7 @@ extends Control
 
 var frame : int = 0
 var is_escape_previous_frame : bool
+var behaviour = preload("res://Scripts/StageEntityBehaviour/DebugStageEntityBehaviour.gd")
 
 func _ready():
 	randomize()
@@ -22,28 +23,21 @@ func _process(_delta):
 	
 	if Global.debug.is_debug:
 		_debug_spawn_entities()
-#		_debug_enemy_shoot()
 
 func _debug_spawn_entities() -> void:
 	var to_spawn = 10
+	var spawn_box = Vector2(200,250)
 	if Global.stage_entity_factory.get_active_count() < to_spawn:
 		Global.stage_entity_factory.spawn(
-			Vector2(randi()%200+200,randi()%200+235),
+			Vector2(randi()%int(spawn_box.x) + (Global.PLAY_AREA_SIZE.x - spawn_box.x)/2,
+				randi()%int(spawn_box.y) + (Global.PLAY_AREA_SIZE.y - spawn_box.y)/2),
 			randf()*2*PI,
 			1.5,
 			StageEntity.TYPE.FAIRY_BLUE,
 			100,
-			0)
+			0,
+			behaviour
+		)
 	for obj in Global.stage_entity_factory.get_children():
-		if !obj.freed && randi()%100 == 0:
+		if obj.is_alive() && randf() < 0.015:
 			obj.set_angle(randf()*2*PI)
-
-func _debug_enemy_shoot() -> void:
-	var split : int = 2
-	if (frame % 2 == 0):
-		for n in split:
-			Global.enemy_bullet_factory.spawn(
-				Global.PLAY_AREA_SIZE / 2,
-				deg_to_rad(frame * 17 + (n * 360 / split)),
-				1.5,
-				randi()%21)

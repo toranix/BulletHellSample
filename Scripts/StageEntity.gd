@@ -24,8 +24,7 @@ var lifetime : float = 0
 func _ready() -> void:
 	state_machine = $AnimationTree["parameters/playback"]
 	$DespawnTimer.set_wait_time(DESPAWN_DELAY)
-	$CollisionShape2d.disabled = true
-#	init_entity(Global.debug_homing_position, PI/2, 0.0, 0, 1000.0, 0.0)
+	set_tangible(false)
 	$CollisionShape2d.shape.radius = 10.0
 	freed = true
 	hide()
@@ -50,14 +49,14 @@ func _handle_border_culling() -> void:
 		return
 
 func _handle_collision() -> void:
+	if !is_tangible(): return
 	if position.distance_squared_to(Global.player.position) < pow($CollisionShape2d.shape.radius + Global.player.get_node("CollisionShape2d").shape.radius, 2):
 		Global.player.on_hit()
-	pass
 
 func death_process() -> void:
 	modulate.a = max(modulate.a * 0.9, 0.0)
 
-func init_entity(posn, init_angle, init_speed, init_type, init_health, init_resist) -> void:
+func init_entity(posn, init_angle, init_speed, init_type, init_health, init_resist, init_behaviour = null) -> void:
 	# Physics properties
 	position = posn
 	set_angle(init_angle)
@@ -75,6 +74,7 @@ func init_entity(posn, init_angle, init_speed, init_type, init_health, init_resi
 	freed = false
 	is_queued_for_despawn = false
 	$CollisionShape2d.disabled = false
+	set_behaviour(init_behaviour)
 	idle()
 	show()
 	set_process(true)
@@ -115,10 +115,26 @@ func match_anim_state(s : String) -> bool:
 func travel_anim_state(s : String) -> void:
 	state_machine.travel(TYPE.keys()[type] + "_" + s)
 
+func is_alive() -> bool:
+	return !freed && !is_queued_for_despawn
+
+func is_tangible() -> bool:
+	return !$CollisionShape2d.disabled
+
+func set_tangible(tangible : bool) -> void:
+	$CollisionShape2d.disabled = !tangible
+	
+func set_behaviour(behaviour) -> void:
+	$Behaviour.set_script(behaviour)
+	if behaviour:
+		$Behaviour._ready()
+		$Behaviour.set_process(true)
+
 func despawn_entity() -> void:
 	freed = true
 	is_queued_for_despawn = false
-	$CollisionShape2d.disabled = true
+	$Behaviour.set_script(null)
+	set_tangible(false)
 	hide()
 	set_process(false)
 

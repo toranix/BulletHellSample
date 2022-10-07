@@ -1,7 +1,7 @@
 extends EntityFactory
 class_name EnemyBulletFactory
 
-const BULLET_CAPACITY := 5000
+const BULLET_CAPACITY := 3000
 const BULLET_PADDING := 50
 
 var bullet_shapes : Array = EnemyBullet.REGIONS.map(

@@ -10,9 +10,9 @@ func _on_ready() -> void:
 	entity_capacity = STAGE_ENTITY_CAPACITY
 	entity_padding = STAGE_ENTITY_PADDING
 
-func spawn(posn, init_angle, init_speed, init_type, init_health, init_resist) -> StageEntity:
+func spawn(posn, init_angle, init_speed, init_type, init_health, init_resist, init_behaviour = null) -> StageEntity:
 	var b = get_entity()
-	if b: b.init_entity(posn, wrapf(init_angle, 0, 2*PI), init_speed, init_type, init_health, init_resist)
+	if b: b.init_entity(posn, wrapf(init_angle, 0, 2*PI), init_speed, init_type, init_health, init_resist, init_behaviour)
 	return b
 
 func get_closest_to_point(posn : Vector2) -> StageEntity:
