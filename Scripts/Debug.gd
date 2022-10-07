@@ -11,7 +11,6 @@ func _ready():
 	$FramerateLabel.show()
 	$BulletCountLabel.hide()
 	$MemoryLabel.show()
-	$HomingTarget.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -28,15 +27,12 @@ func _process(_delta):
 	$FramerateLabel.text = str(Engine.get_frames_per_second())
 	$BulletCountLabel.text = str(Global.active_bullet_count)
 	$MemoryLabel.text = str(Performance.get_monitor(Performance.MEMORY_STATIC)/1024.0/1024.0).pad_decimals(2) + " MB"
-	$HomingTarget.position = Global.debug_homing_position + Vector2(340-15,25-15)
 
 func to_stage() -> void:
 	$BulletCountLabel.show()
-	$HomingTarget.show()
 	
 func to_main_menu() -> void:
 	$BulletCountLabel.hide()
-	$HomingTarget.hide()
 
 func dprint(s) -> void:
 	print("[DEBUG] " + str(s))

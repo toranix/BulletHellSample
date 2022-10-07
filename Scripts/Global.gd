@@ -9,6 +9,7 @@ var debug : Debug
 var player : Player
 var player_bullet_factory : Node2D
 var enemy_bullet_factory : Node2D
+var stage_entity_factory : Node2D
 var active_bullet_count : int = 0
 
 var debug_homing_position : Vector2 = Vector2(300,200)

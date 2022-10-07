@@ -20,25 +20,30 @@ func _process(_delta):
 	
 	frame += 1
 	
-	if Global.debug:
+	if Global.debug.is_debug:
+		_debug_spawn_entities()
 #		_debug_enemy_shoot()
-		_debug_homing()
+
+func _debug_spawn_entities() -> void:
+	var to_spawn = 10
+	if Global.stage_entity_factory.get_active_count() < to_spawn:
+		Global.stage_entity_factory.spawn(
+			Vector2(randi()%200+200,randi()%200+235),
+			randf()*2*PI,
+			1.5,
+			StageEntity.TYPE.FAIRY_BLUE,
+			100,
+			0)
+	for obj in Global.stage_entity_factory.get_children():
+		if !obj.freed && randi()%100 == 0:
+			obj.set_angle(randf()*2*PI)
 
 func _debug_enemy_shoot() -> void:
 	var split : int = 2
 	if (frame % 2 == 0):
 		for n in split:
-			Global.enemy_bullet_factory.spawn_bullet(
+			Global.enemy_bullet_factory.spawn(
 				Global.PLAY_AREA_SIZE / 2,
 				deg_to_rad(frame * 17 + (n * 360 / split)),
 				1.5,
 				randi()%21)
-
-func _debug_homing() -> void:
-	if (frame % 120 == 0):
-		Global.debug_new_homing_position = Vector2(randi()%400+100, randi()%500+85)
-		Global.debug.dprint("New debug homing target: %s" % Global.debug_new_homing_position)
-	var direction_to = Global.debug_homing_position.direction_to(Global.debug_new_homing_position)
-	var distance_to = Global.debug_homing_position.distance_to(Global.debug_new_homing_position)
-	Global.debug_homing_position += direction_to * distance_to * 0.05
-	return

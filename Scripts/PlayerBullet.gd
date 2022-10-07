@@ -43,10 +43,11 @@ func _handle_collision() -> void:
 func _handle_movement() -> void:
 	match type:
 		TYPE.REIMU_HOMING:
-			if get_parent().get_parent().get_node("StageEntity").freed:
+			var closest_entity = Global.stage_entity_factory.get_closest_to_point(position)
+			if !closest_entity:
 				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.15)
 				continue
-			var angle_to_point = position.angle_to_point(Global.debug_homing_position)
+			var angle_to_point = position.angle_to_point(closest_entity.position)
 			var difference = angle_to_point - angle
 			if difference > PI:
 				difference = 2*PI - difference
@@ -54,7 +55,7 @@ func _handle_movement() -> void:
 				difference = 2*PI + difference
 			if (abs(difference) > deg_to_rad(30) &&
 				abs(difference) < deg_to_rad(150) &&
-				position.distance_squared_to(Global.debug_homing_position) <= pow(150, 2)):
+				position.distance_squared_to(closest_entity.position) <= pow(150, 2)):
 				speed = max(SPEEDS[TYPE.REIMU_HOMING]*0.2, speed * 0.9)
 			else:
 				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.15)

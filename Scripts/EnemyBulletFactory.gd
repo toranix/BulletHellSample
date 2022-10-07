@@ -1,7 +1,8 @@
-extends BulletFactory
+extends EntityFactory
 class_name EnemyBulletFactory
 
 const BULLET_CAPACITY := 5000
+const BULLET_PADDING := 50
 
 var bullet_shapes : Array = EnemyBullet.REGIONS.map(
 	func(rect : Rect2):
@@ -12,10 +13,11 @@ var bullet_shapes : Array = EnemyBullet.REGIONS.map(
 
 func _on_ready() -> void:
 	Global.enemy_bullet_factory = self
-	bullet = preload("res://Objects/EnemyBullet.tscn")
-	bullet_capacity = BULLET_CAPACITY
+	entity = preload("res://Objects/EnemyBullet.tscn")
+	entity_capacity = BULLET_CAPACITY
+	entity_padding = BULLET_PADDING
 
-func spawn_bullet(posn, angle, init_speed, type) -> EnemyBullet:
-	var b = get_bullet()
+func spawn(posn, angle, init_speed, type) -> EnemyBullet:
+	var b = get_entity()
 	if b: b.init_bullet(posn, wrapf(angle, 0, 2*PI), init_speed, type)
 	return b

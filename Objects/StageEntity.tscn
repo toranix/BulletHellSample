@@ -1,90 +1,9 @@
-[gd_scene load_steps=45 format=3 uid="uid://bsi4mhy6flapd"]
+[gd_scene load_steps=32 format=3 uid="uid://bsi4mhy6flapd"]
 
 [ext_resource type="Script" path="res://Scripts/StageEntity.gd" id="1_a3ncv"]
 [ext_resource type="Texture2D" uid="uid://dxbchcy6iosjj" path="res://Assets/Entity Spritesheet.png" id="2_l8ro0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_81wx0"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(48, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ygqo2"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(80, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fuvdf"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(112, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_porpy"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(144, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_plis2"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(304, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6pph7"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(336, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4ke6"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(368, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ja85"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(400, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_52dgb"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(176, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rldh8"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(208, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt1sx"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(240, 1639, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_go6n0"]
-atlas = ExtResource("2_l8ro0")
-region = Rect2(272, 1639, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_q50c7"]
-animations = [{
-"frames": [SubResource("AtlasTexture_81wx0"), SubResource("AtlasTexture_ygqo2"), SubResource("AtlasTexture_fuvdf"), SubResource("AtlasTexture_porpy")],
-"loop": true,
-"name": &"FairyBlueIdle",
-"speed": 15.0
-}, {
-"frames": [SubResource("AtlasTexture_plis2"), SubResource("AtlasTexture_6pph7"), SubResource("AtlasTexture_h4ke6"), SubResource("AtlasTexture_0ja85")],
-"loop": true,
-"name": &"FairyBlueMoveRight",
-"speed": 15.0
-}, {
-"frames": [SubResource("AtlasTexture_52dgb"), SubResource("AtlasTexture_rldh8"), SubResource("AtlasTexture_qt1sx"), SubResource("AtlasTexture_go6n0")],
-"loop": true,
-"name": &"FairyBlueTurnRight",
-"speed": 15.0
-}]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_0365b"]
-
-[sub_resource type="Animation" id="Animation_y0knr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_ii6qo"]
 resource_name = "FairyBlueIdle"
@@ -139,35 +58,50 @@ tracks/0/keys = {
 "values": [4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_y0knr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ingm1"]
 _data = {
-"FAIRYBLUE_Idle": SubResource("Animation_ii6qo"),
-"FAIRYBLUE_MoveRight": SubResource("Animation_lwnxi"),
-"FAIRYBLUE_TurnRight": SubResource("Animation_tmr6f"),
+"FAIRY_BLUE_Idle": SubResource("Animation_ii6qo"),
+"FAIRY_BLUE_MoveRight": SubResource("Animation_lwnxi"),
+"FAIRY_BLUE_TurnRight": SubResource("Animation_tmr6f"),
 "RESET": SubResource("Animation_y0knr")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_it36v"]
-animation = &"FAIRYBLUE_Idle"
+animation = &"FAIRY_BLUE_Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0nrw"]
-animation = &"FAIRYBLUE_MoveRight"
+animation = &"FAIRY_BLUE_MoveRight"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olce5"]
-animation = &"FAIRYBLUE_MoveRight"
+animation = &"FAIRY_BLUE_MoveRight"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nloif"]
-animation = &"FAIRYBLUE_TurnRight"
+animation = &"FAIRY_BLUE_TurnRight"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wdktj"]
-animation = &"FAIRYBLUE_TurnRight"
+animation = &"FAIRY_BLUE_TurnRight"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl0wd"]
-animation = &"FAIRYBLUE_TurnRight"
+animation = &"FAIRY_BLUE_TurnRight"
 play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5s2fw"]
-animation = &"FAIRYBLUE_TurnRight"
+animation = &"FAIRY_BLUE_TurnRight"
 play_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ej2x7"]
@@ -183,7 +117,6 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ryj6f"]
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bynk8"]
 
@@ -213,23 +146,23 @@ switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_msngp"]
 states/End/position = Vector2(924, 572)
-states/FAIRYBLUE_Idle/node = SubResource("AnimationNodeAnimation_it36v")
-states/FAIRYBLUE_Idle/position = Vector2(368, 572)
-states/FAIRYBLUE_MoveLeft/node = SubResource("AnimationNodeAnimation_m0nrw")
-states/FAIRYBLUE_MoveLeft/position = Vector2(767, 739)
-states/FAIRYBLUE_MoveRight/node = SubResource("AnimationNodeAnimation_olce5")
-states/FAIRYBLUE_MoveRight/position = Vector2(767, 412)
-states/FAIRYBLUE_TurnLeft/node = SubResource("AnimationNodeAnimation_nloif")
-states/FAIRYBLUE_TurnLeft/position = Vector2(368, 739)
-states/FAIRYBLUE_TurnRight/node = SubResource("AnimationNodeAnimation_wdktj")
-states/FAIRYBLUE_TurnRight/position = Vector2(368, 412)
-states/FAIRYBLUE_UnTurnLeft/node = SubResource("AnimationNodeAnimation_sl0wd")
-states/FAIRYBLUE_UnTurnLeft/position = Vector2(767, 645)
-states/FAIRYBLUE_UnTurnRight/node = SubResource("AnimationNodeAnimation_5s2fw")
-states/FAIRYBLUE_UnTurnRight/position = Vector2(767, 500)
+states/FAIRY_BLUE_Idle/node = SubResource("AnimationNodeAnimation_it36v")
+states/FAIRY_BLUE_Idle/position = Vector2(368, 572)
+states/FAIRY_BLUE_MoveLeft/node = SubResource("AnimationNodeAnimation_m0nrw")
+states/FAIRY_BLUE_MoveLeft/position = Vector2(767, 739)
+states/FAIRY_BLUE_MoveRight/node = SubResource("AnimationNodeAnimation_olce5")
+states/FAIRY_BLUE_MoveRight/position = Vector2(767, 412)
+states/FAIRY_BLUE_TurnLeft/node = SubResource("AnimationNodeAnimation_nloif")
+states/FAIRY_BLUE_TurnLeft/position = Vector2(368, 739)
+states/FAIRY_BLUE_TurnRight/node = SubResource("AnimationNodeAnimation_wdktj")
+states/FAIRY_BLUE_TurnRight/position = Vector2(368, 412)
+states/FAIRY_BLUE_UnTurnLeft/node = SubResource("AnimationNodeAnimation_sl0wd")
+states/FAIRY_BLUE_UnTurnLeft/position = Vector2(767, 645)
+states/FAIRY_BLUE_UnTurnRight/node = SubResource("AnimationNodeAnimation_5s2fw")
+states/FAIRY_BLUE_UnTurnRight/position = Vector2(767, 500)
 states/Start/position = Vector2(230, 572)
-transitions = ["FAIRYBLUE_TurnRight", "FAIRYBLUE_MoveRight", SubResource("AnimationNodeStateMachineTransition_ej2x7"), "FAIRYBLUE_Idle", "FAIRYBLUE_TurnRight", SubResource("AnimationNodeStateMachineTransition_btqmw"), "FAIRYBLUE_MoveRight", "FAIRYBLUE_UnTurnRight", SubResource("AnimationNodeStateMachineTransition_rten2"), "FAIRYBLUE_UnTurnRight", "FAIRYBLUE_Idle", SubResource("AnimationNodeStateMachineTransition_4wgol"), "Start", "FAIRYBLUE_Idle", SubResource("AnimationNodeStateMachineTransition_ryj6f"), "FAIRYBLUE_Idle", "End", SubResource("AnimationNodeStateMachineTransition_bynk8"), "FAIRYBLUE_MoveLeft", "FAIRYBLUE_UnTurnLeft", SubResource("AnimationNodeStateMachineTransition_2qb82"), "FAIRYBLUE_UnTurnLeft", "FAIRYBLUE_Idle", SubResource("AnimationNodeStateMachineTransition_ct0jn"), "FAIRYBLUE_Idle", "FAIRYBLUE_TurnLeft", SubResource("AnimationNodeStateMachineTransition_gnjts"), "FAIRYBLUE_TurnLeft", "FAIRYBLUE_MoveLeft", SubResource("AnimationNodeStateMachineTransition_dds1c"), "FAIRYBLUE_TurnRight", "FAIRYBLUE_UnTurnRight", SubResource("AnimationNodeStateMachineTransition_o30yy"), "FAIRYBLUE_UnTurnRight", "FAIRYBLUE_TurnRight", SubResource("AnimationNodeStateMachineTransition_bh4b6"), "FAIRYBLUE_TurnLeft", "FAIRYBLUE_UnTurnLeft", SubResource("AnimationNodeStateMachineTransition_ie8gl"), "FAIRYBLUE_UnTurnLeft", "FAIRYBLUE_TurnLeft", SubResource("AnimationNodeStateMachineTransition_jqqvh")]
-graph_offset = Vector2(-2, 514.364)
+transitions = ["FAIRY_BLUE_TurnRight", "FAIRY_BLUE_MoveRight", SubResource("AnimationNodeStateMachineTransition_ej2x7"), "FAIRY_BLUE_Idle", "FAIRY_BLUE_TurnRight", SubResource("AnimationNodeStateMachineTransition_btqmw"), "FAIRY_BLUE_MoveRight", "FAIRY_BLUE_UnTurnRight", SubResource("AnimationNodeStateMachineTransition_rten2"), "FAIRY_BLUE_UnTurnRight", "FAIRY_BLUE_Idle", SubResource("AnimationNodeStateMachineTransition_4wgol"), "Start", "FAIRY_BLUE_Idle", SubResource("AnimationNodeStateMachineTransition_ryj6f"), "FAIRY_BLUE_Idle", "End", SubResource("AnimationNodeStateMachineTransition_bynk8"), "FAIRY_BLUE_MoveLeft", "FAIRY_BLUE_UnTurnLeft", SubResource("AnimationNodeStateMachineTransition_2qb82"), "FAIRY_BLUE_UnTurnLeft", "FAIRY_BLUE_Idle", SubResource("AnimationNodeStateMachineTransition_ct0jn"), "FAIRY_BLUE_Idle", "FAIRY_BLUE_TurnLeft", SubResource("AnimationNodeStateMachineTransition_gnjts"), "FAIRY_BLUE_TurnLeft", "FAIRY_BLUE_MoveLeft", SubResource("AnimationNodeStateMachineTransition_dds1c"), "FAIRY_BLUE_TurnRight", "FAIRY_BLUE_UnTurnRight", SubResource("AnimationNodeStateMachineTransition_o30yy"), "FAIRY_BLUE_UnTurnRight", "FAIRY_BLUE_TurnRight", SubResource("AnimationNodeStateMachineTransition_bh4b6"), "FAIRY_BLUE_TurnLeft", "FAIRY_BLUE_UnTurnLeft", SubResource("AnimationNodeStateMachineTransition_ie8gl"), "FAIRY_BLUE_UnTurnLeft", "FAIRY_BLUE_TurnLeft", SubResource("AnimationNodeStateMachineTransition_jqqvh")]
+graph_offset = Vector2(-46, 536.364)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_1svrw"]
 
@@ -241,12 +174,6 @@ texture = ExtResource("2_l8ro0")
 hframes = 12
 region_enabled = true
 region_rect = Rect2(48, 1639, 384, 32)
-
-[node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-visible = false
-frames = SubResource("SpriteFrames_q50c7")
-animation = &"FairyBlueIdle"
-playing = true
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0365b")

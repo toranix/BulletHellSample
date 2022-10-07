@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name StageEntity
 
 enum DEATH_TYPE {EXPLODE_PRIZE, EXPLODE_EMPTY, OFF_SCREEN, BOSS}
+enum TYPE {FAIRY_BLUE}
 
 const DESPAWN_DELAY : float = 0.15
 
@@ -10,7 +11,7 @@ const DESPAWN_DELAY : float = 0.15
 @export var resist : float
 @export var show_health : bool
 @export var speed : float
-@export var type : int
+@export var type : TYPE
 
 var cur_health : float
 var direction : Vector2
@@ -18,29 +19,31 @@ var freed : bool
 var is_queued_for_despawn : bool
 var state_machine : AnimationNodeStateMachinePlayback
 var death_type : DEATH_TYPE
+var lifetime : float = 0
 
 func _ready() -> void:
 	state_machine = $AnimationTree["parameters/playback"]
-	$DespawnTimer.wait_time = DESPAWN_DELAY
+	$DespawnTimer.set_wait_time(DESPAWN_DELAY)
 	$CollisionShape2d.disabled = true
-	init_entity(Global.debug_homing_position, PI/2, 0.0, 0, 1000.0, 0.0)
+#	init_entity(Global.debug_homing_position, PI/2, 0.0, 0, 1000.0, 0.0)
 	$CollisionShape2d.shape.radius = 10.0
-#	hide()
-#	set_process(false)
+	freed = true
+	hide()
+	set_process(false)
 	
-func _process(_delta) -> void:
-	var distance_to = position.distance_to(Global.debug_new_homing_position)
-	set_angle(position.direction_to(Global.debug_new_homing_position).angle())
-	speed = distance_to * 0.05
+func _process(delta) -> void:
+	# If already dead, run death process instead
+	if is_queued_for_despawn:
+		death_process()
 	
-	if speed <= 0.2:
-		speed = 0
-		set_angle(PI/2)
-		idle()
-	else:
-		turn()
+	lifetime += delta
 	
 	position += direction * speed
+	
+	turn()
+
+func death_process() -> void:
+	modulate.a = max(modulate.a * 0.9, 0.0)
 
 func init_entity(posn, init_angle, init_speed, init_type, init_health, init_resist) -> void:
 	# Physics properties
@@ -52,12 +55,15 @@ func init_entity(posn, init_angle, init_speed, init_type, init_health, init_resi
 	type = init_type
 	max_health = init_health
 	cur_health = max_health
+	modulate.a = 1.0
 	
 	# Entity properties
+	lifetime = 0
 	resist = init_resist
 	freed = false
 	is_queued_for_despawn = false
 	$CollisionShape2d.disabled = false
+	idle()
 	show()
 	set_process(true)
 
@@ -66,13 +72,15 @@ func set_angle(new_angle) -> void:
 	direction = Vector2.RIGHT.rotated(angle)
 	
 func idle() -> void:
-	state_machine.travel("FAIRYBLUE_Idle")
+	travel_anim_state("Idle")
 	
 func turn() -> void:
 	if PI/2 > angle || angle > 3*PI/2:
-		state_machine.travel("FAIRYBLUE_MoveRight")
+		travel_anim_state("MoveRight")
 	elif PI/2 < angle && angle < 3*PI/2:
-		state_machine.travel("FAIRYBLUE_MoveLeft")
+		travel_anim_state("MoveLeft")
+	else:
+		idle()
 	$Sprite2d.set_flip_h(match_anim_state("Left"))
 
 func die(d_type : DEATH_TYPE) -> void:
@@ -91,6 +99,9 @@ func take_damage(damage : float) -> void:
 
 func match_anim_state(s : String) -> bool:
 	return str(state_machine.get_current_node()).contains(s)
+
+func travel_anim_state(s : String) -> void:
+	state_machine.travel(TYPE.keys()[type] + "_" + s)
 
 func despawn_entity() -> void:
 	freed = true

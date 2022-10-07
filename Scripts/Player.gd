@@ -3,7 +3,7 @@ class_name Player
 
 const INVULNERABLE_DURATION : float = 1.0
 const PLAYER_MARGIN : float = 10
-const BASIC_SHOT_COOLDOWN : float = 0.14
+const BASIC_SHOT_COOLDOWN : float = 0.08
 
 @export var speed : float
 @export var slow_speed : float
@@ -61,12 +61,12 @@ func on_hit():
 func _handle_shoot(is_slow) -> void:
 	# Basic shots
 	if !is_basic_shot_on_cooldown:
-		Global.player_bullet_factory.spawn_bullet(position + Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
-		Global.player_bullet_factory.spawn_bullet(position - Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
-		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(75), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position + Vector2(30,0), -deg_to_rad(35), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(105), PlayerBullet.TYPE.REIMU_HOMING)
-		Global.player_bullet_factory.spawn_bullet(position - Vector2(30,0), -deg_to_rad(145), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn(position + Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
+		Global.player_bullet_factory.spawn(position - Vector2(10,0), -deg_to_rad(90), PlayerBullet.TYPE.REIMU_BASIC)
+		Global.player_bullet_factory.spawn(position + Vector2(30,0), -deg_to_rad(75), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn(position + Vector2(30,0), -deg_to_rad(35), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn(position - Vector2(30,0), -deg_to_rad(105), PlayerBullet.TYPE.REIMU_HOMING)
+		Global.player_bullet_factory.spawn(position - Vector2(30,0), -deg_to_rad(145), PlayerBullet.TYPE.REIMU_HOMING)
 		$BasicShotTimer.start()
 		is_basic_shot_on_cooldown = true
 
