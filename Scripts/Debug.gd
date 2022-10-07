@@ -14,7 +14,7 @@ func _ready():
 	$HomingTarget.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var debug = Input.get_action_strength("debug_on") - Input.get_action_strength("debug_off")
 	if debug == 1.0 && !is_debug:
 			is_debug = true

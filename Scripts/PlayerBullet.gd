@@ -4,6 +4,7 @@ class_name PlayerBullet
 enum TYPE {REIMU_BASIC, REIMU_HOMING}
 
 const SPEEDS := [15.0, 18.0]
+const DAMAGE := [10.0, 6.0]
 const REGIONS := [
 	Rect2(16, 160, 16, 16),
 	Rect2(16, 208, 64, 64),
@@ -30,14 +31,11 @@ func _handle_border_culling() -> void:
 			return
 
 func _handle_collision() -> void:
-#	if position.distance_squared_to(Global.debug_homing_position) <= pow(Global.player_bullet_factory.bullet_shapes[TYPE.REIMU_HOMING].radius+20.0, 2):
-#		set_angle(randf()*2*PI)
-#		queue_despawn()
-#	return
 	# Check collision with Enemies
 	query.transform = global_transform
 	var result := direct_space_state.intersect_shape(query, 1)
 	if result.size() > 0 && result[0].collider is StageEntity:
+		result[0].collider.take_damage(DAMAGE[type])
 		set_angle(randf()*2*PI)
 		queue_despawn()
 		return
@@ -45,6 +43,9 @@ func _handle_collision() -> void:
 func _handle_movement() -> void:
 	match type:
 		TYPE.REIMU_HOMING:
+			if get_parent().get_parent().get_node("StageEntity").freed:
+				speed = min(SPEEDS[TYPE.REIMU_HOMING], speed * 1.15)
+				continue
 			var angle_to_point = position.angle_to_point(Global.debug_homing_position)
 			var difference = angle_to_point - angle
 			if difference > PI:

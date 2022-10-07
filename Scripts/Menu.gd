@@ -23,7 +23,7 @@ func _process(_delta):
 	# Handle (new) inputs
 	var selection_delta = 0
 	for input in inputs:
-		match (input if current_frame_inputs[input] && !previous_frame_inputs[input] else null):
+		match (input if current_frame_inputs[input] && !previous_frame_inputs[input] else ""):
 			"down":
 				selection_delta += 1
 			"up":
@@ -42,7 +42,7 @@ func _process(_delta):
 func _handle_confirm() -> void:
 	pass
 
-func _handle_extra_input(current_frame_inputs : Dictionary) -> void:
+func _handle_extra_input(_current_frame_inputs : Dictionary) -> void:
 	pass
 
 # Sets appropriate button as selected (and all others as deselected)
