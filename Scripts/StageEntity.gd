@@ -32,15 +32,27 @@ func _ready() -> void:
 	set_process(false)
 	
 func _process(delta) -> void:
-	# If already dead, run death process instead
-	if is_queued_for_despawn:
-		death_process()
-	
 	lifetime += delta
-	
 	position += direction * speed
 	
+	# If already dead, run death process instead of the rest of normal process
+	if is_queued_for_despawn:
+		death_process()
+		return
+	
 	turn()
+	_handle_border_culling()
+	_handle_collision()
+
+func _handle_border_culling() -> void:
+	if (!Global.stage_entity_factory.bounding_box.has_point(position)):
+		die(DEATH_TYPE.OFF_SCREEN)
+		return
+
+func _handle_collision() -> void:
+	if position.distance_squared_to(Global.player.position) < pow($CollisionShape2d.shape.radius + Global.player.get_node("CollisionShape2d").shape.radius, 2):
+		Global.player.on_hit()
+	pass
 
 func death_process() -> void:
 	modulate.a = max(modulate.a * 0.9, 0.0)
