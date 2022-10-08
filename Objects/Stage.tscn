@@ -28,3 +28,6 @@ offset_left = 360.0
 offset_top = 448.0
 offset_right = 360.0
 offset_bottom = 448.0
+
+[node name="BehaviourContainer" type="Control" parent="."]
+anchors_preset = 0

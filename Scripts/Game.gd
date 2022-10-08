@@ -1,6 +1,7 @@
 extends Node2D
 
 var stage = preload("res://Objects/Stage.tscn")
+var behaviour = preload("res://Scripts/Stages/StageDebug.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,7 @@ func start_game() -> void:
 	$MainMenu.hide()
 	var new_stage = stage.instantiate()
 	$StageContainer.add_child(new_stage)
+	new_stage.init_stage(behaviour)
 	$Debug.to_stage()
 
 func restart_game() -> void:
