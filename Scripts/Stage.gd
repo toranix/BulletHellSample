@@ -25,19 +25,16 @@ func _process(_delta):
 		_debug_spawn_entities()
 
 func _debug_spawn_entities() -> void:
-	var to_spawn = 10
+	var to_spawn = 20
 	var spawn_box = Vector2(200,250)
 	if Global.stage_entity_factory.get_active_count() < to_spawn:
 		Global.stage_entity_factory.spawn(
 			Vector2(randi()%int(spawn_box.x) + (Global.PLAY_AREA_SIZE.x - spawn_box.x)/2,
 				randi()%int(spawn_box.y) + (Global.PLAY_AREA_SIZE.y - spawn_box.y)/2),
 			randf()*2*PI,
-			1.5,
+			randf()*2.0 + 1.5,
 			StageEntity.TYPE.FAIRY_BLUE,
 			100,
 			0,
 			behaviour
 		)
-	for obj in Global.stage_entity_factory.get_children():
-		if obj.is_alive() && randf() < 0.015:
-			obj.set_angle(randf()*2*PI)

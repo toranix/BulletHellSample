@@ -126,14 +126,11 @@ func set_tangible(tangible : bool) -> void:
 	
 func set_behaviour(behaviour) -> void:
 	$Behaviour.set_script(behaviour)
-	if behaviour:
-		$Behaviour._ready()
-		$Behaviour.set_process(true)
+	if behaviour: $Behaviour._ready()
 
 func despawn_entity() -> void:
 	freed = true
 	is_queued_for_despawn = false
-	$Behaviour.set_script(null)
 	set_tangible(false)
 	hide()
 	set_process(false)

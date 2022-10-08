@@ -1,6 +1,8 @@
 extends Behaviour
 
-func run_behaviour(obj):
+func run_behaviour() -> void:
+	run_movement()
+	
 	var ring_size = 6
 	while true:
 		await wait(60)
@@ -13,3 +15,9 @@ func run_behaviour(obj):
 				3.5,
 				bullet_type
 			)
+
+func run_movement() -> void:
+	while true:
+		await wait(1)
+		if randf() < 0.015:
+			obj.set_angle(randf()*2*PI)

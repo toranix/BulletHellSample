@@ -1,24 +1,27 @@
 extends Node
 class_name Behaviour
 
+signal waited
 var started : bool
+var obj
 
 func _ready() -> void:
 	started = false
+	obj = get_parent()
+	set_process(true)
 
 func _process(_delta) -> void:
 	if !started:
 		start_behaviour()
+	waited.emit()
 
 func start_behaviour() -> void:
 	started = true
-	run_behaviour(get_parent())
+	run_behaviour()
 	
-func run_behaviour(obj) -> void:
+func run_behaviour() -> void:
 	pass
 
 func wait(n : int) -> void:
 	for i in n:
-		while get_tree().paused:
-			await get_tree().process_frame
-		await get_tree().process_frame
+		if obj: await waited
