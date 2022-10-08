@@ -31,3 +31,5 @@ offset_bottom = 448.0
 
 [node name="BehaviourContainer" type="Control" parent="."]
 anchors_preset = 0
+
+[connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_pause_menu_visibility_changed"]

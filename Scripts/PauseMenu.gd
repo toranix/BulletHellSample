@@ -2,8 +2,6 @@ extends Menu
 
 func _on_ready() -> void:
 	inputs += ["escape"]
-	for input in inputs:
-		previous_frame_inputs[input] = 1.0
 
 func _handle_confirm() -> void:
 	var selected = $Buttons.get_children().filter(func(button): return button.is_selected)[0]
@@ -27,3 +25,6 @@ func resume() -> void:
 	hide()
 	Global.debug.dprint("unpaused")
 	get_tree().paused = false
+
+func _on_pause_menu_visibility_changed():
+	init_all_inputs()

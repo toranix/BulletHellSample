@@ -9,6 +9,7 @@ var inputs := ["down", "up", "confirm"]
 func _ready():
 	select_button(0)
 	_on_ready()
+	init_all_inputs()
 
 func _on_ready() -> void:
 	pass
@@ -53,3 +54,7 @@ func select_button(index : int) -> void:
 	for i in $Buttons.get_child_count():
 		$Buttons.get_child(i).is_selected = i == index
 	selected_button = index
+
+func init_all_inputs() -> void:
+	for input in inputs:
+		previous_frame_inputs[input] = 1.0
