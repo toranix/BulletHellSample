@@ -25,8 +25,8 @@ func _process(_delta):
 		_debug_spawn_entities()
 
 func _debug_spawn_entities() -> void:
-	var to_spawn = 20
-	var spawn_box = Vector2(200,250)
+	var to_spawn = 5
+	var spawn_box = Vector2(400,450)
 	if Global.stage_entity_factory.get_active_count() < to_spawn:
 		Global.stage_entity_factory.spawn(
 			Vector2(randi()%int(spawn_box.x) + (Global.PLAY_AREA_SIZE.x - spawn_box.x)/2,
@@ -34,7 +34,7 @@ func _debug_spawn_entities() -> void:
 			randf()*2*PI,
 			randf()*2.0 + 1.5,
 			StageEntity.TYPE.FAIRY_BLUE,
-			100,
+			500,
 			0,
 			behaviour
 		)

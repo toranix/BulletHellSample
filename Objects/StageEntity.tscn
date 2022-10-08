@@ -192,6 +192,8 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_1svrw")
 [node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Behaviour" type="Node" parent="."]
+[node name="BehaviourContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

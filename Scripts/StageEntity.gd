@@ -124,13 +124,18 @@ func is_tangible() -> bool:
 func set_tangible(tangible : bool) -> void:
 	$CollisionShape2d.disabled = !tangible
 	
-func set_behaviour(behaviour) -> void:
-	$Behaviour.set_script(behaviour)
-	if behaviour: $Behaviour._ready()
+func set_behaviour(new_behaviour) -> void:
+	for obj in $BehaviourContainer.get_children():
+		obj.queue_free()
+	var new_node : Node = Node.new()
+	$BehaviourContainer.add_child(new_node)
+	new_node.set_script(new_behaviour)
+	if new_behaviour: new_node._ready()
 
 func despawn_entity() -> void:
 	freed = true
 	is_queued_for_despawn = false
+	set_behaviour(null)
 	set_tangible(false)
 	hide()
 	set_process(false)

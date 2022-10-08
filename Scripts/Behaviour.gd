@@ -7,7 +7,7 @@ var obj
 
 func _ready() -> void:
 	started = false
-	obj = get_parent()
+	obj = get_parent().get_parent()
 	set_process(true)
 
 func _process(_delta) -> void:
