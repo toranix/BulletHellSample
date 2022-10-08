@@ -15,7 +15,6 @@ grow_vertical = 2
 script = ExtResource("1_ahddf")
 
 [node name="PlayArea" parent="." instance=ExtResource("1_80wfv")]
-layout_mode = 1
 offset_left = 340.0
 offset_right = 940.0
 
@@ -23,13 +22,13 @@ offset_right = 940.0
 position = Vector2(640, 360)
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_a6xiu")]
-layout_mode = 1
 offset_left = 360.0
 offset_top = 448.0
 offset_right = 360.0
 offset_bottom = 448.0
 
 [node name="BehaviourContainer" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_pause_menu_visibility_changed"]

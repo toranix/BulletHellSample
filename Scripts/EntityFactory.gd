@@ -36,3 +36,6 @@ func get_active_count() -> int:
 	for obj in get_children():
 		if !obj.freed: count += 1
 	return count
+
+func clear_active() -> void:
+	pass

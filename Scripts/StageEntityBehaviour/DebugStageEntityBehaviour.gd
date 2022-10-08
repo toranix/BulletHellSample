@@ -22,7 +22,7 @@ func run_behaviour() -> void:
 func run_movement() -> void:
 	update_movement()
 	while true:
-		homing_target = Global.PLAY_AREA_SIZE * Vector2(randf(),randf())
+		homing_target = Vector2(Global.PLAY_AREA_SIZE.x, Global.PLAY_AREA_SIZE.y / 3) * Vector2(randf(),randf())
 		await wait(90)
 
 func update_movement() -> void:

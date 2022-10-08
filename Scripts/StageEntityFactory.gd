@@ -2,7 +2,7 @@ extends EntityFactory
 class_name StageEntityFactory
 
 const STAGE_ENTITY_CAPACITY := 100
-const STAGE_ENTITY_PADDING := 50
+const STAGE_ENTITY_PADDING := 200
 
 func _on_ready() -> void:
 	Global.stage_entity_factory = self
@@ -28,3 +28,8 @@ func get_closest_to_point(posn : Vector2) -> StageEntity:
 				cur_closest = obj
 				cur_dist_squared = next_dist_squared
 	return cur_closest
+
+func clear_active() -> void:
+	for obj in get_children():
+		if !obj.freed && !obj.is_queued_for_despawn:
+			obj.die(StageEntity.DEATH_TYPE.EXPLODE_EMPTY)
